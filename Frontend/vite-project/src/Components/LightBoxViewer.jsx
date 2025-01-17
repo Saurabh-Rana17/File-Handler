@@ -2,7 +2,7 @@ import { Button } from "flowbite-react";
 import React, { useState, useCallback } from "react";
 import ImageViewer from "react-simple-image-viewer";
 
-export default function LightBoxViewer({ images = [] }) {
+export default function LightBoxViewer({ images = [], handleRemove }) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const openImageViewer = () => {
@@ -25,7 +25,12 @@ export default function LightBoxViewer({ images = [] }) {
             alt=""
           />
         </div>
-        <Button fullSized color="failure" className="rounded-none">
+        <Button
+          onClick={handleRemove}
+          fullSized
+          color="failure"
+          className="rounded-none"
+        >
           Remove
         </Button>
       </div>
