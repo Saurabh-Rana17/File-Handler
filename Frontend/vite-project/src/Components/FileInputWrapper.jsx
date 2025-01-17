@@ -1,15 +1,16 @@
 import { FileInput, Label } from "flowbite-react";
 import React from "react";
 
-export default function FileInputWrapper({ children }) {
+export default function FileInputWrapper({ children, isDisabled }) {
   return (
     <>
       <div className="flex">
         <div className="w-full mr-2">
           <div className="flex w-full items-center justify-center">
             <Label
+              disabled={isDisabled}
               htmlFor="dropzone-file"
-              className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
               <div className="flex flex-col items-center justify-center pb-6 pt-5">
                 <svg
