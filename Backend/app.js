@@ -11,6 +11,7 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = 5000; // Change this if needed
 
 // Initialize Supabase client
@@ -34,7 +35,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     const { originalname, buffer, mimetype } = req.file;
 
     // Create a unique file path
-    const filePath = `${Date.now()}_${originalname}`;
+    const filePath = req.body.filePath;
 
     // Upload the file to Supabase Storage
     const { data, error } = await supabase.storage
@@ -44,23 +45,14 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       });
 
     if (error) {
-      console.log(error);
       return res.status(500).json({ error: error.message });
     }
-    console.log(data);
 
     // Get the public URL of the uploaded file
     const { data: publicURL } = supabase.storage
       .from("images")
       .getPublicUrl(filePath);
 
-    // if (urlError) {
-    //   return res.status(500).json({ error: urlError.message });
-    // }
-
-    console.log(publicURL.publicUrl, filePath);
-
-    // Return the public URL of the uploaded image
     res.status(200).json({ publicURL: publicURL.publicUrl });
   } catch (error) {
     res.status(500).json({ error: "Error uploading image: " + error.message });
