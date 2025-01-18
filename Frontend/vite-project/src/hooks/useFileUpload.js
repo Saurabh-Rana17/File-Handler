@@ -16,7 +16,7 @@ export function useFileUpload() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/media/images",
+        "http://localhost:5000/images/upload",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -29,9 +29,21 @@ export function useFileUpload() {
     }
   }
 
-  async function handleRemove(params) {
-    setPublicUrl("");
+  async function handleRemove() {
+    if (!filePath) {
+      return alert("no image to delete");
+    }
     console.log(filePath);
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/images/delete/${filePath}`
+      );
+      console.log(res);
+      setPublicUrl("");
+      setFilePath("");
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
   }
 
   return {

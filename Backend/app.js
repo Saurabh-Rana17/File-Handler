@@ -13,6 +13,6 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/media", uploadRoutes);
+app.use("/images", uploadRoutes);
 
 module.exports = app;

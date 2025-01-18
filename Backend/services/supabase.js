@@ -18,4 +18,13 @@ const uploadImageToSupabase = async (filePath, buffer, mimetype) => {
   return { publicURL: publicURL.publicUrl, filePath: filePath };
 };
 
-module.exports = { uploadImageToSupabase };
+const deleteImageFromSupabase = async ({ filePath }) => {
+  const { data, error } = await supabase.storage
+    .from("images")
+    .remove([filePath]);
+  if (error) {
+    throw new Error(error.message);
+  }
+};
+
+module.exports = { uploadImageToSupabase, deleteImageFromSupabase };
