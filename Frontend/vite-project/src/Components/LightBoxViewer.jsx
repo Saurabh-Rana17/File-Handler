@@ -1,6 +1,7 @@
 import { Button } from "flowbite-react";
 import React, { useState, useCallback } from "react";
 import ImageViewer from "react-simple-image-viewer";
+import SmallImage from "./SmallImage";
 
 export default function LightBoxViewer({ images = [], handleRemove }) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -15,25 +16,11 @@ export default function LightBoxViewer({ images = [], handleRemove }) {
 
   return (
     <div className="">
-      <div className="w-60 m-auto">
-        <div className="cursor-pointer border bg-slate-100 border-slate-200 w-60 h-60 m-auto">
-          <img
-            className="h-full w-full object-contain"
-            src={images[0]}
-            onClick={() => openImageViewer()}
-            width="300"
-            alt=""
-          />
-        </div>
-        <Button
-          onClick={handleRemove}
-          fullSized
-          color="failure"
-          className="rounded-none"
-        >
-          Remove
-        </Button>
-      </div>
+      <SmallImage
+        handleRemove={handleRemove}
+        images={images}
+        openImageViewer={openImageViewer}
+      />
 
       {isViewerOpen && (
         <ImageViewer

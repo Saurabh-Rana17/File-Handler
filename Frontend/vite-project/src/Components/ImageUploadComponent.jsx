@@ -3,6 +3,7 @@ import Title from "./Title";
 import FileComponent from "./FileComponent";
 import LightBoxViewer from "./LightBoxViewer";
 import axios from "axios";
+import Uploading from "./Uploading";
 function ImageUploadComponent() {
   const [publicURL, setUrl] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -37,11 +38,7 @@ function ImageUploadComponent() {
     <>
       <div className="max-w-xl mt-6 border border-black rounded-md p-4 m-auto">
         <Title />
-        {uploading && (
-          <div className="text-center border py-12 rounded-lg  align-middle ">
-            uploading...
-          </div>
-        )}
+        {uploading && <Uploading />}
         {!uploading && publicURL && (
           <LightBoxViewer handleRemove={handleRemove} images={[publicURL]} />
         )}
