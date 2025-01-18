@@ -36,7 +36,7 @@ export function useFileUpload() {
     console.log(filePath);
     try {
       const res = await axios.delete(
-        `http://localhost:5000/images/delete/${filePath}`
+        `http://localhost:5000/images/delete/${encodeURIComponent(filePath)}`
       );
       console.log(res);
       setPublicUrl("");
