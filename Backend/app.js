@@ -1,65 +1,18 @@
-// Import required libraries
 const express = require("express");
-const multer = require("multer");
-const { createClient } = require("@supabase/supabase-js");
-const dotenv = require("dotenv");
 const cors = require("cors");
+const dotenv = require("dotenv");
 
-// Load environment variables
-dotenv.config();
+dotenv.config(); // Load environment variables
 
-// Initialize Express app
+const uploadRoutes = require("./routes/uploadRoutes"); // Import routes
+
 const app = express();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
-const port = 5000; // Change this if needed
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
+// Routes
+app.use("/media", uploadRoutes);
 
-// Set up multer for file handling
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-// Route to handle image upload
-app.post("/upload", upload.single("image"), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-
-  try {
-    // Get the file details
-    const { originalname, buffer, mimetype } = req.file;
-
-    // Create a unique file path
-    const filePath = req.body.filePath;
-
-    // Upload the file to Supabase Storage
-    const { data, error } = await supabase.storage
-      .from("images") // 'images' is the bucket name
-      .upload(filePath, buffer, {
-        contentType: mimetype,
-      });
-
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
-
-    // Get the public URL of the uploaded file
-    const { data: publicURL } = supabase.storage
-      .from("images")
-      .getPublicUrl(filePath);
-
-    res.status(200).json({ publicURL: publicURL.publicUrl });
-  } catch (error) {
-    res.status(500).json({ error: "Error uploading image: " + error.message });
-  }
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+module.exports = app;

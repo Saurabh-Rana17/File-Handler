@@ -15,11 +15,15 @@ function ImageUploadComponent() {
     formData.append("filePath", filePath);
     setUploading(true);
     try {
-      const res = await axios.post("http://localhost:5000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data  ",
-        },
-      });
+      const res = await axios.post(
+        "http://localhost:5000/media/images",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data  ",
+          },
+        }
+      );
       console.log(res);
       setUrl(res.data.publicURL);
     } catch (error) {
