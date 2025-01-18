@@ -15,7 +15,7 @@ const uploadImageToSupabase = async (filePath, buffer, mimetype) => {
     .from("images")
     .getPublicUrl(filePath);
 
-  return publicURL.publicUrl;
+  return { publicURL: publicURL.publicUrl, filePath: filePath };
 };
 
 module.exports = { uploadImageToSupabase };

@@ -10,9 +10,9 @@ exports.handleUpload = async (req, res) => {
     // Get the file details
     const { buffer, mimetype } = req.file;
     // Upload the file to Supabase Storage
-    const publicURL = await uploadImageToSupabase(filePath, buffer, mimetype);
+    const resp = await uploadImageToSupabase(filePath, buffer, mimetype);
 
-    res.status(200).json({ publicURL });
+    res.status(200).json(resp);
   } catch (error) {
     res.status(500).json({ error: "Error uploading image: " + error.message });
   }
