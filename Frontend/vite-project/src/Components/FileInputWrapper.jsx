@@ -33,7 +33,7 @@ export default function FileInputWrapper({ children, isDisabled }) {
                   and drop
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  PNG, JPG, JPEG or GIF
                 </p>
               </div>
               {children}

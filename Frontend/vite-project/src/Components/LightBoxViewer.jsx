@@ -3,7 +3,11 @@ import React, { useState, useCallback } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import SmallImage from "./SmallImage";
 
-export default function LightBoxViewer({ images = [], handleRemove }) {
+export default function LightBoxViewer({
+  images = [],
+  handleRemove,
+  removing,
+}) {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const openImageViewer = () => {
@@ -17,6 +21,7 @@ export default function LightBoxViewer({ images = [], handleRemove }) {
   return (
     <div className="">
       <SmallImage
+        removing={removing}
         handleRemove={handleRemove}
         images={images}
         openImageViewer={openImageViewer}

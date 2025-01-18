@@ -1,14 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
 
-export function useFileUpload() {
+const MAX_FILE_SIZE = 11 * 1024; // 11 KB in bytes
+
+export function useFileUpload(dir = "") {
+  const [error, setError] = useState("");
   const [publicURL, setPublicUrl] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [removing, setRemoving] = useState(false);
   const [filePath, setFilePath] = useState("");
 
   async function handleFileChange(e) {
+    setError("");
     const image = e.target.files[0];
-    const currFilePath = `${Date.now()}_${image.name}`;
+    if (image && image.size > MAX_FILE_SIZE) {
+      setError("File size should not exceed 10 KB.");
+      return;
+    }
+
+    const currFilePath = dir + `${Date.now()}_${image.name}`;
     const formData = new FormData();
     formData.append("image", image);
     formData.append("filePath", currFilePath);
@@ -34,6 +44,7 @@ export function useFileUpload() {
       return alert("no image to delete");
     }
     console.log(filePath);
+    setRemoving(true);
     try {
       const res = await axios.delete(
         `http://localhost:5000/images/delete/${encodeURIComponent(filePath)}`
@@ -43,6 +54,8 @@ export function useFileUpload() {
       setFilePath("");
     } catch (error) {
       alert("Error: " + error.message);
+    } finally {
+      setRemoving(false);
     }
   }
 
@@ -52,5 +65,7 @@ export function useFileUpload() {
     filePath,
     handleFileChange,
     handleRemove,
+    removing,
+    error,
   };
 }

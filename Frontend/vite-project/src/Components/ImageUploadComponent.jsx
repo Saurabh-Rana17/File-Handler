@@ -6,8 +6,14 @@ import Uploading from "./Uploading";
 import { useFileUpload } from "../hooks/useFileUpload";
 
 function ImageUploadComponent() {
-  const { filePath, uploading, handleFileChange, publicURL, handleRemove } =
-    useFileUpload();
+  const {
+    error,
+    uploading,
+    removing,
+    handleFileChange,
+    publicURL,
+    handleRemove,
+  } = useFileUpload();
 
   return (
     <>
@@ -15,11 +21,16 @@ function ImageUploadComponent() {
         <Title />
         {uploading && <Uploading />}
         {!uploading && publicURL && (
-          <LightBoxViewer handleRemove={handleRemove} images={[publicURL]} />
+          <LightBoxViewer
+            removing={removing}
+            handleRemove={handleRemove}
+            images={[publicURL]}
+          />
         )}
         {!uploading && !publicURL && (
           <FileComponent handleFileChange={handleFileChange} />
         )}
+        {error && <p>{error}</p>}
       </div>
     </>
   );
