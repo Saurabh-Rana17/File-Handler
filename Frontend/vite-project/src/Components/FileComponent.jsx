@@ -1,6 +1,7 @@
 import { FileInput, Label } from "flowbite-react";
 import React, { useState } from "react";
 import FileInputWrapper from "./FileInputWrapper";
+import ReactDropzone from "./ReactDropzone";
 
 export default function FileComponent({ handleFileChange }) {
   const isDisabled = false;

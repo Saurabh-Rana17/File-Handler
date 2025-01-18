@@ -4,6 +4,7 @@ import FileComponent from "./FileComponent";
 import LightBoxViewer from "./LightBoxViewer";
 import Uploading from "./Uploading";
 import { useFileUpload } from "../hooks/useFileUpload";
+import ReactDropzone from "./ReactDropzone";
 
 function ImageUploadComponent() {
   const {
@@ -31,6 +32,9 @@ function ImageUploadComponent() {
           <FileComponent handleFileChange={handleFileChange} />
         )}
         {error && <p>{error}</p>}
+        <div className="mt-8">
+          <ReactDropzone />
+        </div>
       </div>
     </>
   );
