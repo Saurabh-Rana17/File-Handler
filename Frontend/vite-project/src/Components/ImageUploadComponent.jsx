@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Title from "./Title";
-import FileComponent from "./FileComponent";
 import LightBoxViewer from "./LightBoxViewer";
 import Uploading from "./Uploading";
 import { useFileUpload } from "../hooks/useFileUpload";
@@ -14,6 +13,7 @@ function ImageUploadComponent() {
     handleFileChange,
     publicURL,
     handleRemove,
+    filePath,
   } = useFileUpload();
 
   return (

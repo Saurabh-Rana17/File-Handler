@@ -6,6 +6,6 @@ const upload = require("../config/multer");
 // POST route for image upload
 
 router.post("/upload", upload.single("image"), uploadController.handleUpload);
-router.post("/delete", deleteController.delete);
+router.post("/delete/:filePath", deleteController.delete);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const MAX_FILE_SIZE = 11 * 1024; // 11 KB in bytes
@@ -9,6 +9,30 @@ export function useFileUpload(dir = "") {
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [filePath, setFilePath] = useState("");
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (publicURL) {
+        // Use sendBeacon to send delete request to backend
+        const url = `http://localhost:5000/images/delete/${encodeURIComponent(
+          filePath
+        )}`;
+        const payload = JSON.stringify({ filePath });
+        const headers = { "Content-Type": "application/json" };
+
+        // Construct and send the request
+        const blob = new Blob([payload], headers);
+        navigator.sendBeacon(url, blob);
+      }
+    };
+
+    // Attach the beforeunload event
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [publicURL, filePath]);
 
   async function handleFileChange(image) {
     setError("");
@@ -42,13 +66,11 @@ export function useFileUpload(dir = "") {
     if (!filePath) {
       return alert("no image to delete");
     }
-    console.log(filePath);
     setRemoving(true);
     try {
-      const res = await axios.post(`http://localhost:5000/images/delete`, {
-        filePath,
-      });
-      console.log(res);
+      const res = await axios.post(
+        `http://localhost:5000/images/delete/${encodeURIComponent(filePath)}`
+      );
       setPublicUrl("");
       setFilePath("");
     } catch (error) {
