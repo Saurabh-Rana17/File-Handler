@@ -10,9 +10,8 @@ export function useFileUpload(dir = "") {
   const [removing, setRemoving] = useState(false);
   const [filePath, setFilePath] = useState("");
 
-  async function handleFileChange(e) {
+  async function handleFileChange(image) {
     setError("");
-    const image = e.target.files[0];
     if (image && image.size > MAX_FILE_SIZE) {
       setError("File size should not exceed 10 KB.");
       return;

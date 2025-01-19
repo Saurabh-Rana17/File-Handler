@@ -29,12 +29,9 @@ function ImageUploadComponent() {
           />
         )}
         {!uploading && !publicURL && (
-          <FileComponent handleFileChange={handleFileChange} />
+          <ReactDropzone handleFileChange={handleFileChange} />
         )}
-        {error && <p>{error}</p>}
-        <div className="mt-8">
-          <ReactDropzone />
-        </div>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </>
   );

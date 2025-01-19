@@ -1,13 +1,12 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function ReactDropzone(props) {
+export default function ReactDropzone({ handleFileChange }) {
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
       accept: { "image/*": [] },
-      onDrop: (file) => console.log(file),
+      onDrop: (file) => handleFileChange(file[0]),
       multiple: false,
-      maxSize: 11 * 1024,
     });
 
   return (
