@@ -45,9 +45,9 @@ export function useFileUpload(dir = "") {
     console.log(filePath);
     setRemoving(true);
     try {
-      const res = await axios.delete(
-        `http://localhost:5000/images/delete/${encodeURIComponent(filePath)}`
-      );
+      const res = await axios.post(`http://localhost:5000/images/delete`, {
+        filePath,
+      });
       console.log(res);
       setPublicUrl("");
       setFilePath("");

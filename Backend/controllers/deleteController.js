@@ -1,6 +1,7 @@
 const { deleteImageFromSupabase } = require("../services/supabase");
+
 exports.delete = async (req, res) => {
-  const filePath = req.params.filePath;
+  const filePath = req.body.filePath;
 
   try {
     await deleteImageFromSupabase({ filePath });
