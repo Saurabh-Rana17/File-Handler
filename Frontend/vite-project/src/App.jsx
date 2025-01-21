@@ -1,6 +1,6 @@
 import "./App.css";
 import ImageUploadComponent from "./Components/ImageUploadComponent";
-import { NavLink, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Nav from "./Components/Nav";
 
 function App() {
