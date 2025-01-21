@@ -9,27 +9,41 @@ export function useFileUpload(dir = "") {
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [filePath, setFilePath] = useState("");
+
   useEffect(() => {
     const handleBeforeUnload = () => {
       if (publicURL) {
-        // Use sendBeacon to send delete request to backend
         const url = `http://localhost:5000/images/delete/${encodeURIComponent(
           filePath
         )}`;
         const payload = JSON.stringify({ filePath });
         const headers = { "Content-Type": "application/json" };
 
-        // Construct and send the request
+        // Construct and send the request using sendBeacon
         const blob = new Blob([payload], headers);
         navigator.sendBeacon(url, blob);
       }
     };
 
-    // Attach the beforeunload event
+    // Attach beforeunload event to send request when the user tries to close the tab or reload the page
     window.addEventListener("beforeunload", handleBeforeUnload);
 
-    // Clean up the event listener
+    // Cleanup when the component is unmounted or the effect is cleaned up
     return () => {
+      // Handle the cleanup and trigger sendBeacon on component unmount as well
+      if (publicURL) {
+        const url = `http://localhost:5000/images/delete/${encodeURIComponent(
+          filePath
+        )}`;
+        const payload = JSON.stringify({ filePath });
+        const headers = { "Content-Type": "application/json" };
+
+        // Construct and send the request using sendBeacon on unmount
+        const blob = new Blob([payload], headers);
+        navigator.sendBeacon(url, blob);
+      }
+
+      // Remove the event listener
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [publicURL, filePath]);
