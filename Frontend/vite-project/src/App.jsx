@@ -3,6 +3,7 @@ import ImageUploadComponent from "./Components/ImageUploadComponent";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Nav from "./Components/Nav";
 import RichText from "./Components/RichTextEditor/RichText";
+import MyEditor from "./Components/Draft/MyEditor";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
         {
           path: "/page2",
           element: <RichText />,
+        },
+        {
+          path: "/page3",
+          element: <MyEditor />,
         },
       ],
     },

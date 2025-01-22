@@ -1,0 +1,33 @@
+/* Tooltip container */
+.ql-tooltip {
+  top: 50px !important; /* Adjust vertical position */
+  left: 20px !important; /* Adjust horizontal position */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Add some padding */
+  color: #333; /* Text color */
+}
+
+/* Tooltip input field */
+.ql-tooltip input {
+  width: 100%; /* Make input field full width */
+  padding: 5px; /* Add padding */
+  border: 1px solid #ddd; /* Border for input */
+  border-radius: 3px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size */
+}
+
+/* Tooltip buttons (Apply and Remove links) */
+.ql-tooltip .ql-action,
+.ql-tooltip .ql-remove {
+  margin: 0 5px; /* Add spacing between buttons */
+  color: #007bff; /* Blue color for links */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.ql-tooltip .ql-action:hover,
+.ql-tooltip .ql-remove:hover {
+  text-decoration: underline; /* Add underline on hover */
+}

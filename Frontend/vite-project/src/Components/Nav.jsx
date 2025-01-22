@@ -15,6 +15,9 @@ export default function Nav() {
         <NavLink to={"/page2"} className="underline mx-4 capitalize">
           page2
         </NavLink>
+        <NavLink to={"/page3"} className="underline mx-4 capitalize">
+          page3
+        </NavLink>
       </div>
       <HR className="mt-2" />
       <div>
