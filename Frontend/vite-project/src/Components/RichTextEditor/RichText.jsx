@@ -1,17 +1,29 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import JoditEditor from "jodit-react";
 
-export default function RichText() {
+const RichText = ({ placeholder }) => {
   const editor = useRef(null);
-  const [content, setContent] = React.useState("");
-  console.log(content);
+  const [content, setContent] = useState("");
+
+  const config = useMemo(
+    () => ({
+      readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+      placeholder: placeholder || "Start typings...",
+    }),
+    [placeholder]
+  );
+
   return (
-    <div className="m-auto w-1/2">
+    <div className=" m-auto w-1/2">
       <JoditEditor
         ref={editor}
         value={content}
-        onChange={(newContent) => setContent(newContent)}
+        config={config}
+        tabIndex={1} // tabIndex of textarea
+        onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
       />
     </div>
   );
-}
+};
+
+export default RichText;
