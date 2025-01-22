@@ -1,9 +1,9 @@
 import React from "react";
 import Title from "./Title";
-import LightBoxViewer from "./LightBoxViewer";
 import Uploading from "./Uploading";
 import { useFileUpload } from "../hooks/useFileUpload";
 import ReactDropzone from "./ReactDropzone";
+import UploadedImage from "./UploadedImage";
 
 function ImageUploadComponent() {
   const {
@@ -22,7 +22,7 @@ function ImageUploadComponent() {
         <Title />
         {uploading && <Uploading />}
         {!uploading && publicURL && (
-          <LightBoxViewer
+          <UploadedImage
             removing={removing}
             handleRemove={handleRemove}
             images={[publicURL]}
