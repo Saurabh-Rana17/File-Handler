@@ -1,7 +1,9 @@
 /* Tooltip container */
 .ql-tooltip {
-  top: 50px !important; /* Adjust vertical position */
-  left: 20px !important; /* Adjust horizontal position */
+  top: 10px !important; /* Position at the top of the editor */
+  left: 50% !important; /* Center horizontally */
+  transform: translateX(-50%) !important; /* Center alignment */
+
   border: 1px solid #ccc; /* Add a border */
   border-radius: 10px; /* Rounded corners */
   padding: 10px; /* Add some padding */
