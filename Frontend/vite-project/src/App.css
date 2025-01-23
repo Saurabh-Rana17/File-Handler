@@ -32,3 +32,11 @@
 .ql-tooltip .ql-remove:hover {
   text-decoration: underline; /* Add underline on hover */
 }
+
+/* .no-tailwind * {
+  all: unset;
+}
+
+.no-tailwind {
+  all: revert;
+} */
