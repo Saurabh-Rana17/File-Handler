@@ -22,11 +22,11 @@ function App() {
         },
         {
           path: "/page2",
-          element: <RichText />,
+          element: <></>,
         },
         {
           path: "/page3",
-          element: <MyEditor />,
+          element: <></>,
         },
       ],
     },
